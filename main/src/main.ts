@@ -1,0 +1,47 @@
+import { registerMicroApps, runAfterFirstMounted, addGlobalUncaughtErrorHandler } from 'qiankun'
+import { createApp } from 'vue'
+import App from './App.vue'
+import loading from './store/loading'
+import router from './router'
+
+createApp(App).use(router).mount('#app')
+
+registerMicroApps(
+    [
+        {
+            name: 'vue2',
+            entry: 'http://localhost:6001/',
+            container: '#container',
+            activeRule: 'vue2',
+        },
+    ],
+    {
+        beforeLoad: [
+            (app) => {
+                loading.value = true
+                return Promise.resolve()
+            },
+        ],
+        afterMount: [
+            () => {
+                loading.value = false
+                return Promise.resolve()
+            },
+        ],
+    }
+)
+
+runAfterFirstMounted(() => {
+    console.log('子应用加载完毕')
+})
+/**
+ 2. 补取异常
+ */
+addGlobalUncaughtErrorHandler((event) => {
+    console.log(event)
+    const { message } = event
+    // 加载失败时提示
+    if (message && message.includes('died in status LOADING_SOURCE_CODE')) {
+        console.log('微应用加载失败_' + msg)
+    }
+})
