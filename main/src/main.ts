@@ -3,18 +3,13 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import loading from './store/loading'
 import router from './router'
+import microApps from './store/microApps'
 
 createApp(App).use(router).mount('#app')
 
+
 registerMicroApps(
-    [
-        {
-            name: 'vue2',
-            entry: 'http://localhost:6001/',
-            container: '#container',
-            activeRule: 'vue2',
-        },
-    ],
+    microApps,
     {
         beforeLoad: [
             (app) => {
@@ -39,9 +34,9 @@ runAfterFirstMounted(() => {
  */
 addGlobalUncaughtErrorHandler((event) => {
     console.log(event)
-    const { message } = event
+    // const { message } = event
     // 加载失败时提示
-    if (message && message.includes('died in status LOADING_SOURCE_CODE')) {
-        console.log('微应用加载失败_' + msg)
-    }
+    // if (message && message.includes('died in status LOADING_SOURCE_CODE')) {
+    //     console.log('微应用加载失败_' + msg)
+    // }
 })

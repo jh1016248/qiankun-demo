@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
+import 'element-ui/lib/theme-chalk/index.css'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
@@ -21,8 +21,10 @@ function render(props = {}) {
 if (!window.__POWERED_BY_QIANKUN__) {
 	render()
 }
-
-// bootstrap,mount,unmount 必须使用 async 函数
+else {
+  window.__webpack_public_path__ = window.__INJECTED_PUBLIC_PATH_BY_QIANKUN__;
+}
+// 导出的 bootstrap,mount,unmount 必须为 async 函数
 export async function bootstrap() {
   console.log('bootstrap')
 }
