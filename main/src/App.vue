@@ -1,7 +1,9 @@
+
+
 <template>
-  <div class="header">
+	<div class="header">
 		<ul class="navs">
-			<li @click="handleNav(item)" class="item" :class="{active: active === item.url}" v-for="item in navs" :key="item.url">{{item.name}}</li>
+			<li @click="handleToHome(item)" class="item" :class="{active: active === item.url}" v-for="item in navs" :key="item.url">{{item.name}}</li>
 			<li class="flex1">
 				<span v-if="globalStateData.userInfo == ''" @click="handleLogin">登录</span>
 				<span v-else>欢迎您: {{globalStateData.userInfo}}</span>
@@ -11,15 +13,24 @@
 	<div class="loading" v-if="loading">loading...</div>
 	<div id="container"></div>
 </template>
+
 <script setup lang="ts">
-import { start } from 'qiankun'
 import { onMounted, ref, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { start } from 'qiankun'
 import router from './router'
 import { globalStateData, setGlobalState } from './store/globalState'
+import { useRoute } from 'vue-router'
 import loading from './store/loading'
 
 const navs = [
+	{
+		name: '测试vue3 首页',
+		url: '/vue3#/',
+	},
+	{
+		name: '测试vue3 test',
+		url: '/vue3#/test',
+	},
 	{
 		name: '测试vue2 Home',
 		url: '/vue2#/',
@@ -31,14 +42,12 @@ const navs = [
 ]
 const active = ref('')
 const route = useRoute()
-
 watch(route, (val) => {
 	const item = navs.find(item => item.url === val.fullPath)
 	if(item) {	
 		active.value = item.url
 	}
-}, { deep: true })
-
+})
 onMounted(() => {
 	start({
 		prefetch: true, // 开启预加载
@@ -47,21 +56,17 @@ onMounted(() => {
 		},
 	})
 })
-
 const handleLogin = () => {
 	setGlobalState({
-		userInfo: 'Main Login',
+		userInfo: 'name',
 	})
 }
-const handleNav = (item: any) => {
+const handleToHome = (item: any) => {
 	router.push(item.url)
+	// window.history.pushState(item.url)
 }
 </script>
-
 <style>
-* {
-	margin: 0;
-}
 html,
 body {
 	background: #f5f5f5;
@@ -79,6 +84,9 @@ body {
 	z-index: 2;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+* {
+	margin: 0;
+}
 .navs {
 	display: flex;
 	padding: 20px 0;
@@ -92,6 +100,7 @@ body {
 	cursor: pointer;
 }
 .navs li.item{
+	
 	text-decoration: underline;
 }
 .navs li.active{
@@ -104,5 +113,8 @@ body {
 .loading{
 	text-align: center;
 	margin: 50px 0;
+}
+.container > div[data-qiankun="vue3"]{
+	background: none;
 }
 </style>

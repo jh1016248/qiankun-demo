@@ -3,37 +3,32 @@ import App from './App.vue'
 import router from './router'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css'
+import './index.css'
 
 Vue.config.productionTip = false
-Vue.use(ElementUI)
+Vue.use(ElementUI);
 
 let instance = null
-
 function render(props = {}) {
-  const { container } = props
-  instance = new Vue({
-    router,
-    render: h => h(App)
-  }).$mount(container ? container.querySelector('#app') : '#app')
+    const { container } = props
+    instance = new Vue({
+        router,
+        render: (h) => h(App),
+    }).$mount(container ? container.querySelector('#app') : '#app')
 }
 
 // 本地调试
 if (!window.__POWERED_BY_QIANKUN__) {
 	render()
 }
-else {
-  window.__webpack_public_path__ = window.__INJECTED_PUBLIC_PATH_BY_QIANKUN__;
-}
-// 导出的 bootstrap,mount,unmount 必须为 async 函数
+
 export async function bootstrap() {
-  console.log('bootstrap')
+  console.log(111)
 }
-// 挂载子应用
 export async function mount(props) {
   console.log(props)
   render(props)
 }
-// 卸载子应用
 export async function unmount() {
   instance.$destroy()
 }

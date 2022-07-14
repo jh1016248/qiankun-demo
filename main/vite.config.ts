@@ -4,11 +4,12 @@ import vue from '@vitejs/plugin-vue'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue()],
-  base: './qiankun',
+  base: '/qiankun',
   server: {
-    port: 7001,
+    host: '0.0.0.0',
+    port: 6003,
     headers: {
-      'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Origin': '*',
     }
   }
 })

@@ -10,6 +10,6 @@ router.beforeEach((to, from, next) => {
       Object.assign(history.state, {current: from.fullPath})
     }
     next()
-})
+  })
   
 export default router

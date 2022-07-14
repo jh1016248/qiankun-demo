@@ -1,12 +1,15 @@
-import { registerMicroApps, runAfterFirstMounted, addGlobalUncaughtErrorHandler } from 'qiankun'
 import { createApp } from 'vue'
 import App from './App.vue'
-import loading from './store/loading'
+import {
+    registerMicroApps,
+    runAfterFirstMounted,
+    addGlobalUncaughtErrorHandler,
+} from 'qiankun'
 import router from './router'
+import loading from './store/loading'
 import microApps from './store/microApps'
 
 createApp(App).use(router).mount('#app')
-
 
 registerMicroApps(
     microApps,
@@ -25,7 +28,6 @@ registerMicroApps(
         ],
     }
 )
-
 runAfterFirstMounted(() => {
     console.log('子应用加载完毕')
 })
