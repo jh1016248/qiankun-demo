@@ -2,9 +2,9 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
 import routes from './router'
-import { initGolbalState } from './store/golbalState'
 import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css';
+import useGlobalState from './store/useGlobalState'
 
 let instance = null
 let history = null
@@ -30,8 +30,7 @@ export async function bootstrap(props) {
 }
 
 export function mount(props) {
-    console.log(props)
-    initGolbalState(props)
+    useGlobalState(props)
     render(props)
 }
 export function unmount() {

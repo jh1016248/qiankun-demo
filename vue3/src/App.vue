@@ -1,10 +1,11 @@
 <template>
 	<img alt="Vue logo" src="http://www.john-online.cn/vue3/assets/logo.png">
-	<p>当前登录用户：{{golbalState.userInfo}}</p>
+	<p>当前登录用户：{{globalState.userInfo}}</p>
 	<router-view></router-view>
 </template>
 <script setup>
-import golbalState from './store/golbalState'
+import useGlobalState from './store/useGlobalState'
+const { globalState } = useGlobalState()
 </script>
 
 <style>

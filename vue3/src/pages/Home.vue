@@ -9,12 +9,14 @@
 
 <script setup>
 import { ref } from 'vue'
-import { setGlobalState } from '../store/golbalState'
+import useGlobalState from '../store/useGlobalState'
 const active = ref(false)
+const { setGlobalState } = useGlobalState()
 
 const getContainer = () => {
     return document.querySelector('div[data-qiankun=vue3]')
 }
+
 
 const handleChange = () => {
     setGlobalState({

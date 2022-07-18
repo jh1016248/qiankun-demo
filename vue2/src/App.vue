@@ -1,5 +1,6 @@
 <template>
 	<div id="app">
+		<h4 style="margin-top: 20px;">当前登录用户： {{globalData.userInfo}}</h4>
 		<div id="nav">
 			<router-link to="/">Home</router-link> |
 			<router-link to="/about">About</router-link>
@@ -7,6 +8,16 @@
 		<router-view />
 	</div>
 </template>
+
+<script>
+export default {
+	computed: {
+		globalData() {
+			return this.$store.state.globalData
+		}
+	}	
+}
+</script>
 
 <style lang="less" scoped>
 #app {

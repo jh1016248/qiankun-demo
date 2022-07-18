@@ -17,9 +17,9 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue'
 import { start } from 'qiankun'
-import router from './router'
-import { globalStateData, setGlobalState } from './store/globalState'
 import { useRoute } from 'vue-router'
+import { globalStateData, setGlobalState } from './store/globalState'
+import router from './router'
 import loading from './store/loading'
 
 const navs = [
